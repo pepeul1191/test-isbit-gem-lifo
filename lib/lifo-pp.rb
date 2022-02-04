@@ -1,13 +1,15 @@
 class LifoPP
+  # atributos de la clase LifoPP
   attr_accessor :prices, :amount, :inventario, :ventas, :unidades_vendidas, :cogs
 
+  # constructor de la clase, los parámetros los precios y la unidades de compra/venta
   def initialize(prices, amount)
-    @prices = prices
-    @amount = amount
-    @inventario = []
-    @ventas = 0
-    @unidades_vendidas = 0
-    @cogs = 0
+    @prices = prices # arreglo de los precios
+    @amount = amount # arreglo de unidades compra/venta
+    @inventario = [] # arreglo donde se irá guardando los ingresos de materiales con su respectivo costo que sería igual al precio total / la cantidad a ingresar
+    @ventas = 0 # acumulador de las ventas realizadas
+    @unidades_vendidas = 0 # acumulador de las unidades vendidas
+    @cogs = 0 # costo del stock
   end
 
   def calcular_inventario_inicial
@@ -25,8 +27,8 @@ class LifoPP
   def calcular_ventas
     for i in 0..@amount.length - 1
       if @amount[i] <= 0
-        @ventas = @ventas + @prices[i]
-        @unidades_vendidas = @unidades_vendidas + (-1 * @amount[i])
+        @ventas = @ventas + @prices[i] # acumulamos los precios de venta
+        @unidades_vendidas = @unidades_vendidas + (-1 * @amount[i]) # acumulamos las cantidades
       end
     end
   end
@@ -46,6 +48,7 @@ class LifoPP
     end
   end
 
+  # cálculo de utilidad luego de LIFO
   def get_utlidad
     @ventas - @cogs
   end

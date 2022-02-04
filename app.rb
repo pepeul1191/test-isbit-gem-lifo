@@ -34,14 +34,13 @@ for i in 0..amount.length - 1
           cantidad = cantidad + inventario[k][:cantidad]
           inventario[k][:cantidad] = 0
         end
-        # ventas = ventas + prices[i]
       else
         cogs = cogs + (-1 * cantidad) * inventario[k][:costo]
         inventario[k][:cantidad] = inventario[k][:cantidad] + cantidad
         cantidad = 0
-        # ventas = ventas + prices[i]
       end
     end
+    ventas = ventas + prices[i]
   end
 end
 

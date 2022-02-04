@@ -10,26 +10,24 @@ ventas = 0 # acumulador de las ventas realizadas
 cogs = 0 # acumulador de costo de mi inventario vendido
 inventario = [] # arreglo donde se irá guardando los ingresos de materiales con su respectivo costo que sería igual al precio total / la cantidad a ingresar
 
-for i in 0..amount.length - 1 # vamos a iterar los arreglos
-  if amount[i] > 0 # si el número es positivo, es un ingreso de inventario
-    # ingreso
-    inventario.push({ # agregamos el ingreso de material con el costo unitario del mismo
+for i in 0..amount.length - 1
+  if amount[i] > 0
+    inventario.push({
       :costo => prices[i] / amount[i],
       :cantidad => amount[i]
     })
-  else # si el número es negativo, vamos a descontar del inventario existente
-    # venta
+  else
     cantidad = amount[i]
-    for k in 0..inventario.length - 1 # iteramos el arreglo del inventario con el fin de vender primero lo que ingresó primero y a la par iremos calculando el costo de ese material saliente
-      if (-1 * cantidad) > inventario[k][:cantidad] # en caso que la cantidad a descontar sea mayor a la existencia del inventario que primero ingresó
-        cogs = cogs + inventario[k][:cantidad] * inventario[k][:costo] # en caso que se tenga en el inventario que ingresó primero, se descuenta 
+    for k in 0..inventario.length - 1 
+      if (-1 * cantidad) > inventario[k][:cantidad]
+        cogs = cogs + inventario[k][:cantidad] * inventario[k][:costo]
         if inventario[k][:cantidad] > 0
-          cantidad = cantidad + inventario[k][:cantidad] # en caso que se tenga en el inventario que ingresó sigiuente, se descuenta 
-          inventario[k][:cantidad] = 0 # en caso que se tenga en el inventario que ingresó primero se quedó sin inventario
+          cantidad = cantidad + inventario[k][:cantidad]
+          inventario[k][:cantidad] = 0
         end
-      else # en caso que se tenga en el inventario que ingresó primero, se descuenta 
-        cogs = cogs + (-1 * cantidad) * inventario[k][:costo] # calculamos el cogs de del descuento
-        inventario[k][:cantidad] = inventario[k][:cantidad] + cantidad # actualizamos el inventario
+      else
+        cogs = cogs + (-1 * cantidad) * inventario[k][:costo]
+        inventario[k][:cantidad] = inventario[k][:cantidad] + cantidad
         cantidad = 0 
       end
     end

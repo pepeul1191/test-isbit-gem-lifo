@@ -1,0 +1,3 @@
+# FIFO
+
+    $ ruby app.rb

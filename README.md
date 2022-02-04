@@ -1,3 +1,3 @@
-# FIFO
+# LIFO
 
     $ ruby app.rb

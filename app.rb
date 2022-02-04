@@ -17,27 +17,30 @@ for i in 0..amount.length - 1
       :cantidad => amount[i]
     })
   else
-    cantidad = amount[i]
-    for k in 0..inventario.length - 1 
-      if (-1 * cantidad) > inventario[k][:cantidad]
-        cogs = cogs + inventario[k][:cantidad] * inventario[k][:costo]
-        if inventario[k][:cantidad] > 0
-          cantidad = cantidad + inventario[k][:cantidad]
-          inventario[k][:cantidad] = 0
-        end
-      else
-        cogs = cogs + (-1 * cantidad) * inventario[k][:costo]
-        inventario[k][:cantidad] = inventario[k][:cantidad] + cantidad
-        cantidad = 0 
-      end
-    end
     ventas = ventas + prices[i]
   end
 end
 
+unidades_vendidas = -1 * amount.select{|x| x < 0}.sum
+puts 'Inventario inicial:'
+puts inventario
+# puts inventario
+puts "unidades vendidas = #{unidades_vendidas}"
+for i in 0..inventario.length - 1
+  k = inventario.length - 1 - i
+  if unidades_vendidas <= inventario[k][:cantidad]
+    cogs = cogs +  unidades_vendidas * inventario[k][:costo]
+    inventario[k][:cantidad] = inventario[k][:cantidad] - unidades_vendidas
+    unidades_vendidas = 0
+  elsif unidades_vendidas >= 0 && unidades_vendidas > inventario[k][:cantidad]
+    cogs = cogs + inventario[k][:cantidad] * inventario[k][:costo]
+    unidades_vendidas = unidades_vendidas - inventario[k][:cantidad]
+    inventario[k][:cantidad] = 0
+  end
+end
 # respuestas
 puts 'Inventario final:'
 puts inventario
-puts "ventas - #{ventas}"
+puts "ventas = #{ventas}"
 puts "cogs = #{cogs}"
 puts "ventas - cogs = #{ventas - cogs}"

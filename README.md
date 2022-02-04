@@ -10,9 +10,28 @@ Instalación de gema:
 Publicar gema:
 
 1. Crear cuenta en https://rubygems.org/sign_up
+2. Pushear la gema
 
+        
+    $ gem push lifo-pp-0.0.0.gem
 
 Uso de gema:
+
+1. Agregar la dependencia
+
+Gemfile
+
+```
+source 'https://rubygems.org'
+
+gem 'lifo-pp'
+```
+
+2. Descargar la dependencia
+
+    $ bundler install
+
+3. Probar la gema con el siguiente código
 
 ```ruby
 require 'lifo-pp'
@@ -36,9 +55,18 @@ puts "utilidad : #{lifo.get_utlidad}"
 
 ```
 
+Código en replit
+
+https://replit.com/@pepeul1191/TrainedKnottyLeads#Gemfile
+
+Rubygems
+
+https://rubygems.org/gems/lifo-pp
+
 ---
 
 Fuentes:
 
 + https://guides.rubygems.org/make-your-own-gem/
 + https://docs.github.com/es/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks
++ https://medium.com/@dhyegocalota/how-to-create-and-publish-your-first-configurable-ruby-gem-996ad50f0629

@@ -12,30 +12,31 @@ inventario = [] # arreglo donde se irá guardando los ingresos de materiales con
 
 for i in 0..amount.length - 1
   if amount[i] > 0
+    # actualizamos el inventario (cantidad y consto unitario)
     inventario.push({
-      :costo => prices[i] / amount[i],
+      :costo => 1.0 * prices[i] / amount[i],
       :cantidad => amount[i]
     })
-  else
+  else # calculamos las ventas totales
     ventas = ventas + prices[i]
   end
 end
-
+# calculamos el total de unidades
 unidades_vendidas = -1 * amount.select{|x| x < 0}.sum
-puts 'Inventario inicial:'
+puts 'Inventario inicial:' # comprobamos el inventario inicial antes del LIFO
 puts inventario
 # puts inventario
 puts "unidades vendidas = #{unidades_vendidas}"
-for i in 0..inventario.length - 1
-  k = inventario.length - 1 - i
-  if unidades_vendidas <= inventario[k][:cantidad]
-    cogs = cogs +  unidades_vendidas * inventario[k][:costo]
-    inventario[k][:cantidad] = inventario[k][:cantidad] - unidades_vendidas
-    unidades_vendidas = 0
-  elsif unidades_vendidas >= 0 && unidades_vendidas > inventario[k][:cantidad]
-    cogs = cogs + inventario[k][:cantidad] * inventario[k][:costo]
-    unidades_vendidas = unidades_vendidas - inventario[k][:cantidad]
-    inventario[k][:cantidad] = 0
+for i in 0..inventario.length - 1 # vamos a recorer el inventario para evaluar el LIFO
+  k = inventario.length - 1 - i # indice para recorrer primero lo último en ingresar
+  if unidades_vendidas <= inventario[k][:cantidad] # en caso que el inventario actual pueda abastecer la venta, entonces...
+    cogs = cogs +  unidades_vendidas * inventario[k][:costo] # actualizamos el cogs con el costo de ese inventario
+    inventario[k][:cantidad] = inventario[k][:cantidad] - unidades_vendidas # actualizamos la cantidad del inventario
+    unidades_vendidas = 0 # actulizamos la cantidad de unidades a vender restantes
+  elsif unidades_vendidas >= 0 && unidades_vendidas > inventario[k][:cantidad] # en caso que el inventario actual no pueda abastecer la venta, entonces...
+    cogs = cogs + inventario[k][:cantidad] * inventario[k][:costo] # actualizamos el cogs con el costo de ese inventario
+    unidades_vendidas = unidades_vendidas - inventario[k][:cantidad] # actulizamos la cantidad de unidades a vender restantes
+    inventario[k][:cantidad] = 0 # actulizamos la cantidad del inventario
   end
 end
 # respuestas

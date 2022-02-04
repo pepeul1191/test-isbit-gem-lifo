@@ -47,5 +47,6 @@ end
 
 puts 'Inventario final:'
 puts inventario
-puts ventas
+puts "ventas - #{ventas}"
 puts "cogs = #{cogs}"
+puts "ventas - cogs = #{ventas - cogs}"

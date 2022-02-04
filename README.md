@@ -7,6 +7,11 @@ Instalación de gema:
     $ gem build lifo-pp.gemspec
     $ gem install ./lifo-pp-0.0.0.gem
 
+Publicar gema:
+
+1. Crear cuenta en https://rubygems.org/sign_up
+
+
 Uso de gema:
 
 ```ruby

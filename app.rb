@@ -21,7 +21,7 @@ for i in 0..amount.length - 1
     # ingreso material, costo
     costo = costo + amount[i] * prices[i]
     inventario.push({
-      :costo => prices[i],
+      :costo => prices[i] / amount[i],
       :cantidad => amount[i]
     })
   else
@@ -34,49 +34,19 @@ for i in 0..amount.length - 1
           cantidad = cantidad + inventario[k][:cantidad]
           inventario[k][:cantidad] = 0
         end
+        # ventas = ventas + prices[i]
       else
-        cogs = cogs + cantidad * inventario[k][:costo]
+        cogs = cogs + (-1 * cantidad) * inventario[k][:costo]
         inventario[k][:cantidad] = inventario[k][:cantidad] + cantidad
         cantidad = 0
+        # ventas = ventas + prices[i]
       end
     end
-    ventas = ventas + -1 * (amount[i] * prices[i])
   end
 end
 
+
+puts 'Inventario final:'
 puts inventario
-puts cogs
-
-"""
-amount.each do |e|
-  if amount[index] > 0
-    costo = prices[index] * amount[index]
-    ii = ii + amount[index]
-    ivalor.push(
-      {
-        :costo_unitario => costo,
-        :cantidad => amount[index]
-      }
-    )
-  else
-    # vendiendo
-    venta = prices[index] * amount[index]
-    index2 = 0
-    ii = ii + amount[index]
-    ivalor.each do |k|
-      c = false
-      if ivalor[index2][:cantidad] - amount[index] >= 0
-        # descontar del primero 
-        ivalor[index2][:cantidad] = ivalor[index2][:cantidad] - amount[index]
-        cogs = cogs + prices[]
-      elsif (ivalor[index2][:cantidad] + ivalor[index2 + 1][:cantidad]) - amount[index] >= 0 # 10
-        # descontar primero y siguiente
-        ivalor[index2][:cantidad] = 0 # 3 -> 0
-        ivalor[index2 + 1][:cantidad] = amount[index] - ivalor[index2][:cantidad] # 10 -> 7
-      end
-      index2 = index2 + 1
-    end
-  end
-  index = index + 1
-end
-"""
+puts ventas
+puts "cogs = #{cogs}"

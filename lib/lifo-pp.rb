@@ -17,7 +17,7 @@ class LifoPP
       if @amount[i] > 0
         # actualizamos el inventario (cantidad y consto unitario)
         inventario.push({
-          :costo_unitario => 1.0 * prices[i] / @amount[i],
+          :costo_unitario => prices[i],
           :cantidad => @amount[i]
         })
       end
@@ -27,7 +27,7 @@ class LifoPP
   def calcular_ventas
     for i in 0..@amount.length - 1
       if @amount[i] <= 0
-        @ventas = @ventas + @prices[i] # acumulamos los precios de venta
+        @ventas = @ventas + @prices[i] * @amount[i] * -1 # acumulamos los precios de venta
         @unidades_vendidas = @unidades_vendidas + (-1 * @amount[i]) # acumulamos las cantidades
       end
     end

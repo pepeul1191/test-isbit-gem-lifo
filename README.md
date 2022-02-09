@@ -35,14 +35,16 @@ gem 'lifo-pp'
 
 ```ruby
 require 'lifo-pp'
+require 'fifo-pp'
 
-prices= [5000, 6500, 7000, 6000, 8000, 9000, 6500]
-amount=[4, -2, -1 , 5, -0.5,  -0.5, -4.5]
+prices = [5000, 6500, 7000, 6000, 8000, 9000, 6500]
+amount = [4   , -2  , -1  , 5   , -0.5, -0.5, -4.5]
 
 lifo = LifoPP.new(prices, amount)
 lifo.calcular_ventas
 lifo.calcular_inventario_inicial
 
+puts 'LIFO:'
 puts "inventario inicial"
 puts lifo.inventario
 
@@ -53,6 +55,15 @@ puts "cogs : #{lifo.cogs}"
 puts "ventas : #{lifo.ventas}"
 puts "utilidad : #{lifo.get_utlidad}"
 
+puts '+++++++++++++++++++++++++++++++++++++'
+puts 'FIFO:'
+
+fifo = FifoPP.new(prices, amount)
+fifo.calcular_fifo
+puts "cogs : #{fifo.cogs}"
+puts "ventas : #{fifo.ventas}"
+puts "utilidad : #{fifo.get_utlidad}"
+puts fifo.inventario
 ```
 
 Código en replit

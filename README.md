@@ -5,7 +5,7 @@
 Instalación de gema:
 
     $ gem build lifo-pp.gemspec
-    $ gem install ./lifo-pp-0.0.0.gem
+    $ gem install ./lifo-pp-0.0.1.gem
 
 Publicar gema:
 
@@ -13,7 +13,7 @@ Publicar gema:
 2. Pushear la gema
 
         
-    $ gem push lifo-pp-0.0.0.gem
+    $ gem push lifo-pp-0.0.1.gem
 
 Uso de gema:
 
